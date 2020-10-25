@@ -1,0 +1,254 @@
+<particles
+  [params]="myParams"
+  [style]="myStyle"
+  [width]="width"
+  [height]="height"
+></particles>
+<div class="contenedor">
+  <div class="row">
+    <div class="col s6 l3">
+      <h5>
+        <a
+          style="
+            color: #525dac;
+            border: 1px solid;
+            border-color: #525dac;
+            padding: 5px;
+          "
+          routerLink="/home"
+          >Crypto Info</a
+        >
+      </h5>
+    </div>
+    <div class="col s2 offset-s2 offset-l7">
+      <button
+        id="donar"
+        class="btn modal-trigger"
+        data-target="modal1"
+        style="margin-top: 15px; background-color: #525dac"
+      >
+        Donar
+      </button>
+
+      <!-- Modal Structure -->
+      <div id="modal1" class="modal">
+        <div class="row">
+          <div class="col s7">
+            <div class="modal-content">
+              <h6 class="white-text">Constribuir con el proyecto:</h6>
+              <p class="white-text">
+                Tus aportes son necesarios para el mantenimiento y crecimiento
+                del proyecto. Haga su donacion a la siguiente direccion de
+                BITCOIN:
+              </p>
+            </div>
+          </div>
+          <div class="col s5" style="margin-top: 15px">
+            <div class="modal-img">
+              <img src="../../../assets/web-developer-master-tn.svg" alt="" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s10 offset-s1">
+            <h5 class="white-text">13yCoTSjJX9G9W1t3Xc44N1UDD6efZhqh7</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <nav
+      style="
+        background-color: #333537;
+        border-radius: 40px;
+        border-color: #333537;
+        width: 80%;
+        margin-left: 10%;
+      "
+    >
+      <div class="nav-wrapper">
+        <form>
+          <div class="input-field">
+            <input
+              [(ngModel)]="coinData"
+              name="data"
+              class="form-control"
+              id="search"
+              type="search"
+              autocomplete="off"
+              required
+            />
+            <label class="label-icon" for="search"
+              ><i class="material-icons">search</i></label
+            >
+            <i class="material-icons">close</i>
+          </div>
+        </form>
+      </div>
+    </nav>
+  </div>
+  <div class="row center" style="margin-top: -4px">
+    <button
+      class="waves-effect waves-light btn"
+      style="background-color: #525dac; border-radius: 20px"
+      (click)="showDataInfo()"
+    >
+      Search
+    </button>
+    <button
+      class="waves-effect waves-light btn"
+      style="background-color: #525dac; border-radius: 20px; margin-left: 5px"
+      (click)="clearDataInfo()"
+      routerLink="/home"
+    >
+      Clear
+    </button>
+    <button
+      class="waves-effect waves-light btn sidenav-trigger"
+      style="background-color: #525dac; border-radius: 20px; margin-left: 5px"
+      data-target="slide-out"
+    >
+      Coins
+    </button>
+
+    <ul
+      id="slide-out"
+      class="sidenav"
+      style="width: 30%;"
+    >
+      <li 
+      *ngFor = "let list of coinList">
+        <p
+        class="white-text" 
+        *ngFor = "let coinL of list">
+          {{coinL.id}}
+        </p
+        >
+    </li>
+    </ul>
+  </div>
+</div>
+<div class="container" *ngIf="!coin">
+  <div class="center">
+    <h5 class="white-text">Las 3 noticias destacadas del dia:</h5>
+  </div>
+  <div class="row">
+    <div class="col s10 offset-s1 m4" *ngFor="let news of allNews; index as i">
+      <div class="z-depth-1">
+        <div class="card" *ngIf="i < 3">
+          <div class="card-image">
+            <img src="{{ news.urlToImage }}" style="height: 120px" />
+          </div>
+          <div class="card-content black" style="height: 190px">
+            <label>Autor:</label>
+            <p style="color: #bdbdbd">
+              {{ news.author }}
+            </p>
+            <a href="{{ news.url }}" target="_blank" style="color: white">
+              <p class="change" style="margin-top: 10px; text-align: justify">
+                {{ news.title }}
+              </p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="contenedor" *ngIf="coin">
+  <div class="row">
+    <div class="col s12 l5" style="background-color: black; margin-top: 8px">
+      <div class="row">
+        <div class="col s4">
+          <img
+            src="{{ coin.image.large }}"
+            alt=""
+            style="width: 120 px; height: 120px; margin-top: 25%"
+          />
+        </div>
+        <div class="col s8">
+          <div class="row">
+            <div class="col s8">
+              <h5 class="white-text">{{ coin.name }}</h5>
+            </div>
+            <div class="col s4">
+              <a
+                href="#!"
+                class="secondary-content"
+                *ngIf="
+                  coin.market_data.price_change_percentage_24h_in_currency.usd >
+                  0
+                "
+                >+{{
+                  coin.market_data.price_change_percentage_24h_in_currency.usd
+                }}%</a
+              >
+              <a
+                href="#!"
+                class="secondary-content red-text"
+                *ngIf="
+                  coin.market_data.price_change_percentage_24h_in_currency.usd <
+                  0
+                "
+                >{{
+                  coin.market_data.price_change_percentage_24h_in_currency.usd
+                }}%</a
+              >
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s4">
+              <h6 class="green-text">
+                {{ coin.market_data.current_price.usd }}
+              </h6>
+            </div>
+            <div
+              class="col s6 offset-s2"
+              style="margin-bottom: -10px"
+              *ngIf="coin.market_data.price_change_24h > 0"
+            >
+              <h6 class="green-text">
+                <i class="tiny material-icons">arrow_drop_up</i
+                >{{ coin.market_data.price_change_24h }}
+              </h6>
+            </div>
+            <div
+              class="col s6 offset-s2"
+              style="margin-bottom: -10px"
+              *ngIf="coin.market_data.price_change_24h < 0"
+            >
+              <h6 class="red-text">
+                <i class="tiny material-icons">arrow_drop_down</i
+                >{{ coin.market_data.price_change_24h }}
+              </h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 l7">
+      <div *ngFor="let coinN of coinNews; index as i">
+        <ul class="collection" *ngIf="i < 3" style="border-color: black">
+          <li class="collection-item avatar" style="background-color: black">
+            <img src="{{ coinN.urlToImage }}" alt="" class="circle" />
+            <a
+              href="{{ coinN.url }}"
+              target="_blank"
+              class="title"
+              style="color: #525dac"
+              >{{ coinN.title }}</a
+            >
+            <p style="color: darkgray">
+              {{ coinN.publishedAt | date: "dd/mm/yy" }}
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
