@@ -5,9 +5,9 @@ import { HttpClient } from "@angular/common/http";
   providedIn: 'root'
 })
 export class CryptoInfoService {
-  private URLallNews = "https://newsapi.org/v2/everything?q=cryptocurrency&apiKey=61b771cd22af4892a81aa51eb8b60b42"
+  private URLallNews = "https://api.currentsapi.services/v1/search?keywords=cryptocurrency&apiKey=vf9pq7KPg56O47t6kcS_vlLx4OfdmjSbwSrM38N9Za9JhS03"
 
-  private URLcoinNews = "https://newsapi.org/v2/everything?q"
+  private URLcoinNews = "https://api.currentsapi.services/v1/search?keywords"
 
   private URLcoinData = "https://api.coingecko.com/api/v3/coins"
 
@@ -22,7 +22,7 @@ export class CryptoInfoService {
   }
 
   getCoinNews(data){
-    const URLapi = "apiKey=61b771cd22af4892a81aa51eb8b60b42"
+    const URLapi = "apiKey=vf9pq7KPg56O47t6kcS_vlLx4OfdmjSbwSrM38N9Za9JhS03"
     return this.http.get(`${this.URLcoinNews}=${data}&${URLapi}`)
   }
 

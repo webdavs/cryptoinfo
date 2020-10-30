@@ -29,8 +29,8 @@ export class SearchComponent implements OnInit {
 
     this.cryptoService.getAllNews().subscribe(
       (res) => {
-        console.log(res['articles'])
-        this.allNews = res['articles']
+        console.log(res['news'])
+        this.allNews = res['news']
       },
       (err) => {
         console.log(err)
@@ -112,8 +112,8 @@ export class SearchComponent implements OnInit {
     )
     this.cryptoService.getCoinNews(this.coinData).subscribe(
       (res) => {
-        console.log(res['articles'])
-        this.coinNews = res['articles']
+        console.log(res['news'])
+        this.coinNews = res['news']
       },
       (err) => {
         console.log(err)

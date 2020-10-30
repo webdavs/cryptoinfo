@@ -1,5 +1,5 @@
 export interface News {
-    urlToImage?: String;
+    image?: String;
     title?: String;
     description?: String;
     publishedAt?: Date;
